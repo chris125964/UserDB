@@ -1,0 +1,3 @@
+<jboss-web>
+	<security-domain>em2016</security-domain>
+</jboss-web>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>
+			<h:outputText value="#{userEditController.title}"/>
+		</h1>
+		<h:form acceptcharset="ISO-8859-1">
+			<h:panelGrid columns="3">
+				<f:facet name="header">Allgemein</f:facet>
+				
+				<h:outputLabel value="Vorname"/>
+				<h:inputText id="a_name" value="#{userEditController.user.vorname}"
+					validatorMessage="Der Vorname muss mindestens 4 und maximal 30 Zeichen lang sein">
+					<f:validateRequired/>
+					<f:validateLength minimum="4" maximum="30"/>
+				</h:inputText>
+				<h:message for="a_name" style="color: red"/>
+				
+				<h:outputLabel value="Nachname"/>
+				<h:inputText id="a_nachname" value="#{userEditController.user.nachname}"
+					validatorMessage="Der Nachname muss mindestens 4 und maximal 30 Zeichen lang sein">
+					<f:validateRequired/>
+					<f:validateLength minimum="4" maximum="30"/>
+				</h:inputText>
+				<h:message for="a_nachname"/>
+				
+				<h:outputLabel value="e-mail"/>
+				<h:inputText id="a_email" value="#{userEditController.user.email}">
+					<f:validateRequired/>
+					<f:validateLength minimum="4" maximum="30"/>
+				</h:inputText>
+				<h:message for="a_email"/>
+				
+				<h:outputLabel value="Passwort"/>
+				<h:inputText id="a_passwort" value="#{userEditController.user.passwort}">
+					<f:validateRequired/>
+					<f:validateLength minimum="4" maximum="30"/>
+				</h:inputText>
+				<h:message for="a_passwort"/>
+				
+			</h:panelGrid>
+			<h:commandButton value="Speichern" action="#{userEditController.doSave}"/>
+			<h:commandButton value="Abbrechen" immediate="true" action="#{userEditController.doCancel}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

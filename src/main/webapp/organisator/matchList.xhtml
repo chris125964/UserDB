@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>Alle Matches</h1>
+
+		<h:form acceptcharset="ISO-8859-1">
+			<p:tabView id="tabView">
+				<!-- User -->
+				<p:tab title="Anwender">
+					<p:dataTable value="#{userListProducer.user}" var="anwender">
+						<p:column>
+							<p:commandButton onclick="confirmationUser.show()"
+								actionListener="#{userListController.doDeleteUser(anwender)}"
+								icon="ui-icon-close" />
+						</p:column>
+						<!-- Nachname -->
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Nachname" />
+							</f:facet>
+							<h:outputText value="#{anwender.nachname}" />
+						</p:column>
+						<!-- Vorname -->
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Vorname" />
+							</f:facet>
+							<h:outputText value="#{anwender.vorname}" />
+						</p:column>
+						<!-- e-mail -->
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="e-mail" />
+							</f:facet>
+							<h:outputText value="#{anwender.email}" />
+						</p:column>
+						<!-- Passwort -->
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Passwort" />
+							</f:facet>
+							<h:outputText value="#{anwender.passwort}" />
+						</p:column>
+						<p:column>
+							<h:commandLink value="Editieren"
+								action="#{userListController.doEditUser(anwender)}">
+							</h:commandLink>
+						</p:column>
+					</p:dataTable>
+					<h:commandButton value="User hinzufügen"
+						action="#{userListController.doAddUser}" />
+					<p:confirmDialog message="User wirklich loeschen?"
+						header="User loeschen" severity="alert" widgetVar="confirmationUser">
+						<p:commandButton value="Ja" onclick="confirmationUser.hide()"
+							actionListener="#{userListController.commitDeleteUser}"
+							ajax="false" />
+						<p:commandButton value="Nein" onclick="confirmationUser.hide()" />
+					</p:confirmDialog>
+				</p:tab>
+				<!-- Teams -->
+				<p:tab title="Teams">
+					<p:dataTable value="#{teamListProducer.team}" var="mannschaft">
+						<p:column>
+							<p:commandButton onclick="confirmationTeam.show()"
+								actionListener="#{teamListController.doDeleteTeam(mannschaft)}"
+								icon="ui-icon-close" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Name" />
+							</f:facet>
+							<h:outputText value="#{mannschaft.name}" />
+						</p:column>
+						<p:column>
+							<h:commandLink value="Editieren"
+								action="#{teamListController.doEditTeam(mannschaft)}">
+							</h:commandLink>
+						</p:column>
+					</p:dataTable>
+					<p:commandButton value="Team hinzufügen"
+						action="#{teamListController.doAddTeam}" />
+					<p:confirmDialog message="Team wirklich loeschen?"
+						header="Team loeschen" severity="alert" widgetVar="confirmationTeam">
+						<p:commandButton value="Ja" onclick="confirmationTeam.hide()"
+							actionListener="#{teamListController.doCommitDeleteTeam}"
+							ajax="false" />
+						<p:commandButton value="Nein" onclick="confirmationTeam.hide()" />
+					</p:confirmDialog>
+				</p:tab>
+				<!-- Groups -->
+				<p:tab title="Gruppen">
+					<p:dataTable value="#{groupListProducer.group}" var="group">
+						<p:column>
+							<p:commandButton onclick="confirmationGroup.show()"
+								actionListener="#{groupListController.doDeleteGroup(group)}"
+								icon="ui-icon-close" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Buchstabe" />
+							</f:facet>
+							<h:outputText value="#{group.letter}" />
+						</p:column>
+						<p:column>
+							<f:facet name="Gruppe">
+								<p:outputLabel value="letter"></p:outputLabel>
+								<h:outputText value="#{gruppe.letter}" />
+							</f:facet>
+						</p:column>
+						<p:column>
+							<h:commandLink value="Editieren"
+								action="#{groupListController.doEditTeam(group)}">
+							</h:commandLink>
+						</p:column>
+					</p:dataTable>
+					<p:commandButton value="Gruppe hinzufügen"
+						action="#{groupListController.doAddGroup}" />
+					<p:confirmDialog message="Gruppe wirklich loeschen?"
+						header="Gruppe loeschen" severity="alert" widgetVar="confirmationGroup">
+						<p:commandButton value="Ja" onclick="confirmationGroup.hide()"
+							actionListener="#{groupListController.doCommitDeleteGroup}"
+							ajax="false" />
+						<p:commandButton value="Nein" onclick="confirmationGroup.hide()" />
+					</p:confirmDialog>
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</ui:define>
+</ui:composition>

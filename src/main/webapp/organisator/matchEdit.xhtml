@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>
+			<h:outputText value="#{matchEditController.title}"/>
+		</h1>
+		<h:form acceptcharset="ISO-8859-1">
+			<h:panelGrid columns="3">
+				<p:selectOneMenu id="team1" value="#{matchEditController.teamId1}" effect="fade" >
+					<f:selectItems value="#{teamListProducer.team}" var="team" itemLabel="#{team.name}"
+								itemValue="#{team.id}" 
+					/>
+				</p:selectOneMenu>
+				<p:selectOneMenu id="team2" value="#{matchEditController.teamId2}" effect="fade" >
+					<f:selectItems value="#{teamListProducer.team}" var="team" itemLabel="#{team.name}"
+								itemValue="#{team.id}"
+					/>
+				</p:selectOneMenu>
+			</h:panelGrid>
+			<h:commandButton value="Speichern" action="#{matchEditController.doSave}"/>
+			<h:commandButton value="Abbrechen" immediate="true" action="#{matchEditController.doCancel}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

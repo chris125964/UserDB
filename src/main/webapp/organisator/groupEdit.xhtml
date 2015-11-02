@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>
+			<h:outputText value="#{groupEditController.title}"/>
+		</h1>
+		<h:form acceptcharset="ISO-8859-1">
+			<h:panelGrid columns="1">
+				<f:facet name="header">Allgemein</f:facet>
+				<h:outputLabel value="Team 1"/>
+				<h:outputLabel value="#{groupEditController.group.letter}"/>
+				<h:inputText id="a_letter" value="#{groupEditController.group.letter}"
+					validatorMessage="Der Name darf nur aus einem Zeichen bestehen">
+					<f:validateRequired/>
+					<f:validateLength minimum="1" maximum="1"/>
+				</h:inputText>
+				<!-- Team 1 -->
+				<h:outputLabel value="Team 1"/>
+				<p:selectOneMenu id="team1" value="#{groupEditController.teamId1}" effect="fade" >
+					<f:selectItems value="#{teamListProducer.team}" var="team" itemLabel="#{team.name}"
+								itemValue="#{team.id}" 
+					/>
+				</p:selectOneMenu>
+				<!-- Team 2 -->
+				<f:facet name="Team 2"/>
+				<p:selectOneMenu id="team2" value="#{groupEditController.teamId2}" effect="fade" >
+					<f:selectItems value="#{teamListProducer.team}" var="team" itemLabel="#{team.name}"
+								itemValue="#{team.id}" 
+					/>
+				</p:selectOneMenu>
+				<!-- Team 3 -->
+				<p:selectOneMenu id="team3" value="#{groupEditController.teamId3}" effect="fade" >
+					<f:selectItems value="#{teamListProducer.team}" var="team" itemLabel="#{team.name}"
+								itemValue="#{team.id}" 
+					/>
+				</p:selectOneMenu>
+				<!-- Team 4 -->
+				<p:selectOneMenu id="team4" value="#{groupEditController.teamId4}" effect="fade" >
+					<f:selectItems value="#{teamListProducer.team}" var="team" itemLabel="#{team.name}"
+								itemValue="#{team.id}" 
+					/>
+				</p:selectOneMenu>
+			</h:panelGrid>
+			<h:commandButton value="Speichern" action="#{groupEditController.doSave}"/>
+			<h:commandButton value="Abbrechen" immediate="true" action="#{groupEditController.doCancel}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>
